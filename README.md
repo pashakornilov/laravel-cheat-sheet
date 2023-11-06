@@ -46,4 +46,7 @@ Route::resource('Sheets','SheetController');
 // Частичное определение ресурсных маршрутов
 Route::resource('/articles', 'ArticleController',['only' => ['index', 'show']]);
 Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update', 'destroy']]);
+
+// only - позволяет определить белый список действий, которые будут доступны по данному роуту
+// except - определяет черный список действий, которые будут недоступны по данному роуту
 ```
