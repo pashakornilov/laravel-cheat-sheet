@@ -2,7 +2,7 @@
 
 ## Route
 
-Пример: http://example.com/articles
+	Пример: http://example.com/articles
 
 ### Define route
 
@@ -15,6 +15,28 @@ Route::get('/articles', 'ArticleController@index');
 Route::get('/articles', [ArticleController::class, 'index']);
 ```
 
+### Route Parameter
+
+```php
+// Передача числового ID статьи в переменную $id.
+Route::get('/articles/{article}', function ($id) {return 'article '. $id;});
+
+// Передача числового ID статьи в переменную $articleId, ID комментария в переменную $commentId
+Route::get('/articles/{article}/comments/{comment}', function ($articleId, $commentId) {});
+```
+
+### Optional parameters
+
+```php
+
+// по умолчанию для $name используется значение null
+Route::get('/articles/{name?}', function ($name = null) {return $name;});
+
+// по умолчанию 'Alex' в $name
+Route::get('/articles/{name?}', function ($name = 'Alex') {return $name;});
+```
+
+	Для использования опционального параметра необходимо указать значение параметров по умолчанию
 ### HTTP Verbs
 
 ```php
@@ -35,6 +57,9 @@ Route::patch('/articles', function() {});
 
 //  Удаление ресурса.
 Route::delete('/articles', function() {});
+
+// Ответ на любой тип запроса
+Route::any('/articles', function() {});
 ```
 
 ### RESTful Controllers
@@ -44,9 +69,11 @@ Route::delete('/articles', function() {});
 Route::resource('Sheets','SheetController');
 
 // Частичное определение ресурсных маршрутов
+	// only - позволяет определить белый список действий, которые будут доступны по данному роуту
 Route::resource('/articles', 'ArticleController',['only' => ['index', 'show']]);
+	// except - определяет черный список действий, которые будут недоступны по данному роуту
 Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update', 'destroy']]);
 
-// only - позволяет определить белый список действий, которые будут доступны по данному роуту
-// except - определяет черный список действий, которые будут недоступны по данному роуту
+
+
 ```
