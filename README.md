@@ -11,8 +11,8 @@
 Route::get('/articles', function(){});
 
 // Регистрация GET-маршрута с использованием контроллера
-Route::get('/articles', 'SheetController@index');
-Route::get('/articles', [SheetController::class, 'index']);
+Route::get('/articles', 'ArticleController@index');
+Route::get('/articles', [ArticleController::class, 'index']);
 ```
 
 ### HTTP Verbs
@@ -35,4 +35,19 @@ Route::patch('/articles', function() {});
 
 //  Удаление ресурса.
 Route::delete('/articles', function() {});
+```
+
+### RESTful Controllers
+
+```php
+// Определение ресурсных маршрутов
+
+Route::resource('Sheets','SheetController');
+```
+
+```php
+// Частичное определение ресурсных маршрутов
+
+Route::resource('/articles', 'ArticleController',['only' => ['index', 'show']]);
+Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update', 'destroy']]);
 ```
