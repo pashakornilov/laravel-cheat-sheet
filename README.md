@@ -41,13 +41,9 @@ Route::delete('/articles', function() {});
 
 ```php
 // Определение ресурсных маршрутов
-
 Route::resource('Sheets','SheetController');
-```
 
-```php
 // Частичное определение ресурсных маршрутов
-
 Route::resource('/articles', 'ArticleController',['only' => ['index', 'show']]);
 Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update', 'destroy']]);
 ```
