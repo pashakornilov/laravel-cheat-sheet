@@ -2,15 +2,17 @@
 
 ## Маршруты
 
+Пример: http://example/articles
+
 ```php
 // Регистрация GET-маршрута с использованием замыкания
 
-Route::get('sheets', function(){});
+Route::get('articles', function(){});
 ```
 
 ```php
 // Регистрация GET-маршрута с использованием контроллера
 
-Route::get('sheets', 'SheetController@index');
-Route::get('sheets', [SheetController::class, 'index']);
+Route::get('articles', 'SheetController@index');
+Route::get('articles', [SheetController::class, 'index']);
 ```
