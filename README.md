@@ -2,7 +2,7 @@
 
 ## Маршруты
 
-Пример: http://example/articles
+Пример: http://example.com/articles
 
 ```php
 // Регистрация GET-маршрута с использованием замыкания
