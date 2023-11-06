@@ -9,7 +9,7 @@ Route::get('sheets', function(){});
 ```
 
 ```php
-// Регистрация GET-маршрута с использованием контроллера, логика находится в методе index контроллера SheetController.
+// Регистрация GET-маршрута с использованием контроллера
 
 Route::get('sheets', 'SheetController@index');
 Route::get('sheets', [SheetController::class, 'index']);
