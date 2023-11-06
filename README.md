@@ -66,14 +66,11 @@ Route::any('/articles', function() {});
 
 ```php
 // Определение ресурсных маршрутов
-Route::resource('Sheets','SheetController');
+Route::resource('/articles','ArticleController');
 
 // Частичное определение ресурсных маршрутов
-	// only - позволяет определить белый список действий, которые будут доступны по данному роуту
+	// only - позволяет определить белый список экшенов, которые доступны по данному роуту
 Route::resource('/articles', 'ArticleController',['only' => ['index', 'show']]);
-	// except - определяет черный список действий, которые будут недоступны по данному роуту
+	// except - определяет черный список экшенов, которые недоступны по данному роуту
 Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update', 'destroy']]);
-
-
-
 ```
