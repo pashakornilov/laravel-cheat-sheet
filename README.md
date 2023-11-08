@@ -78,6 +78,11 @@ Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update',
 
 - [Eloquent](#eloquent)
     - [Получение записей](#получение-записей)
+    - [Вставка / обновление](#вставкаобновление)
+    - [Удаление](#удаление)
+    - [Отношения](#отношения)
+    - [Коллекции](#коллекции)
+    - [Другие](#другие)
 
 ### Получение записей
 
@@ -505,33 +510,33 @@ $posts->pluck('title');
 $post->push('tags', 1);
 ```
 
-saveMany() 
+#### saveMany() 
 ```php
 // Сохранить коллекцию моделей
 Post::saveMany([$post1, $post2]);
 ```
-#### toBase() | 
+#### toBase()
 ```php
 // Преобразовать к первоначальному состоянию
 $post->toBase();
 ```
 
-#### toSql() | 
+#### toSql()
 ```php
 // Получить SQL запрос модели
 Post::where('id', 1)->toSql();
 ```
-#### with() | 
+#### with()
 ```php
 // Добавить дополнительные условия
 Post::with('user', 'comments')->get();
 ```
-#### withAggregate() | 
+#### withAggregate()
 ```php
 // Добавить агрегатную функцию
 Post::withAggregate('comments', 'count')->get();
 ```
-#### withCount() | 
+#### withCount()
 ```php
 // Добавить подсчет связанных моделей
 Post::withCount('comments')->get();
