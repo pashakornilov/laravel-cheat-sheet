@@ -76,6 +76,9 @@ Route::resource('/articles', 'ArticleController',['except' => ['edit', 'update',
 
 ## Eloquent
 
+- [Eloquent](#eloquent)
+    - [Получение записей](#получение-записей)
+
 ### Получение записей
 
 #### all()  
