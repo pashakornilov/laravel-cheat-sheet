@@ -258,3 +258,87 @@ $table->nullableUlidMorphs('nullable_morphable');
 
 // Пример вывода для типа nullableUuidMorphs
 $table->nullableUuidMorphs('nullable_uuid_morphable');
+```
+
+### Модификаторы столбцов
+
+```php
+// Переместить столбец "email" после столбца "username" (работает в MySQL).
+$table->after('username'); // $table->string('email')->after('username')->nullable();
+
+// Установить столбец "id" как автоинкрементирующийся (первичный ключ).
+$table->autoIncrement();
+
+// Указать набор символов "utf8mb4" для столбца "content" (поддерживается MySQL).
+$table->charset('utf8mb4');
+
+// Указать каталожное сравнение "utf8mb4_unicode_ci" для столбца "name" (поддерживается MySQL/PostgreSQL/SQL Server).
+$table->collation('utf8mb4_unicode_ci');
+
+// Добавить комментарий к столбцу "description" (работает в MySQL/PostgreSQL).
+$table->comment('Описание столбца');
+
+// Установить значение "по умолчанию" для столбца "status".
+$table->default('active');
+
+// Поместить столбец "created_at" в начало таблицы (работает в MySQL).
+$table->first();
+
+// Установить начальное значение 100 для автоинкрементирующегося поля "order_id" (поддерживается MySQL / PostgreSQL).
+$table->from(100);
+
+// Сделать столбец "secret_key" невидимым для запросов SELECT * (работает в MySQL).
+$table->invisible();
+
+// Разрешить вставку NULL-значений в столбец "notes".
+$table->nullable();
+
+// Создать вычисляемый столбец "total_price" на основе выражения (поддерживается MySQL / PostgreSQL).
+$table->storedAs('price * quantity');
+
+// Установить INTEGER-столбец "votes" как UNSIGNED (работает в MySQL).
+$table->unsigned();
+
+// Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP как значение "по умолчанию".
+$table->useCurrent();
+
+// Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP при обновлении записи (работает в MySQL).
+$table->useCurrentOnUpdate();
+
+// Создать виртуальный вычисляемый столбец "full_name" на основе выражения (поддерживается MySQL / PostgreSQL / SQLite).
+$table->virtualAs('first_name || " " || last_name');
+
+// Создать столбец с автоинкрементом с указанными параметрами последовательности (поддерживается PostgreSQL).
+$table->generatedAs('nextval(\'my_sequence\')');
+
+// Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом (поддерживается PostgreSQL).
+$table->always();
+
+// Установить тип пространственного столбца "location" как "geometry" (поддерживается PostgreSQL).
+$table->isGeometry();
+```
+
+### Индексы
+
+```php
+// Добавить первичный ключ на столбец "id".
+$table->primary('id');
+
+// Добавить составной первичный ключ на столбцы "id" и "parent_id".
+$table->primary(['id', 'parent_id']);
+
+// Добавить уникальный индекс на столбец "email".
+$table->unique('email');
+
+// Добавить обычный индекс на столбец "state".
+$table->index('state');
+
+// Добавить полнотекстовый индекс на столбец "body" (работает в MySQL/PostgreSQL).
+$table->fullText('body');
+
+// Добавить полнотекстовый индекс на столбец "body" с указанием языка (работает в PostgreSQL).
+$table->fullText('body')->language('english');
+
+// Добавить пространственный индекс на столбец "location" (кроме SQLite).
+$table->spatialIndex('location');
+```
