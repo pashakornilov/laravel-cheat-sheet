@@ -5,3 +5,4 @@
 
 - Работа с базой данных
   - [Eloquent ORM](Eloquent.md)
+  - [Migrations](Migrations.md)
