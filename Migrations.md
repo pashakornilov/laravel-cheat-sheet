@@ -1,5 +1,7 @@
 ## Migrations
+
 ### Консольные команды
+
 #### Выполнить миграции:
 
    ```console
@@ -15,7 +17,7 @@
 #### Создать новый файл миграции:
 
    ```console
-   php artisan migrate:make name
+   php artisan make:migration create_posts_table
    ```
 
 #### Сброс и повторное выполнение всех миграций:
