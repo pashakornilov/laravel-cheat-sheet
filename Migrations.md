@@ -9,46 +9,38 @@
 
 #### Выполнить миграции:
 
-   ```console
-   php artisan migrate
-   ```
-
-#### Создать репозиторий для миграций:
-
-   ```console
-   php artisan migrate:install
-   ```
+```console
+php artisan migrate
+```
 
 #### Создать новый файл миграции:
 
-   ```console
-   php artisan make:migration CreatePostsTable
-   ```
+```console
+php artisan make:migration CreatePostsTable
+```
 
+#### Очистка базы данных перед миграцией
+
+```shell
+php artisan migrate:fresh
+```
 #### Сброс и повторное выполнение всех миграций:
 
-   ```console
-   php artisan migrate:refresh
-   ```
+```shell
+php artisan migrate:refresh
+```
 
 #### Отмена всех миграций базы данных:
 
-   ```console
-   php artisan migrate:reset
-   ```
+```console
+php artisan migrate:reset
+```
 
 #### Откат последней миграции базы данных:
 
-   ```console
-   php artisan migrate:rollback
-   ```
-
-#### Публикация миграций пакета в директорию миграций:
-
-   ```console
-   php artisan migrate:publish vendor/package
-   ```
-
+```console
+php artisan migrate:rollback
+```
 
 ### Типы данных
 #### **Целочисленные столбцы**:
