@@ -273,3 +273,19 @@ Post::withAggregate('comments', 'count')->get();
 // Добавить подсчет связанных моделей
 Post::withCount('comments')->get();
 ```
+
+### Используйте строгий режим Eloquent
+
+[Строгий режим Eloquent](https://laravel.com/docs/9.x/eloquent#enabling-eloquent-strict-mode) — это благословение для отладки. Он будет генерировать исключение, когда происходит:
+
+- Ленивая загрузка отношений;
+- Присвоение незаполняемых атрибутов;
+- Доступ к атрибутам, которые не существуют (или не были получены).
+
+Добавьте этот код в метод `boot()` вашего `AppServiceProvider.php`:
+
+```php
+Model::shouldBeStrict(    
+	! app()->isProduction() // Only outside of production.
+);
+```

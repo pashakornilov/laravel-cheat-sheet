@@ -22,7 +22,7 @@
 #### Создать новый файл миграции:
 
    ```console
-   php artisan make:migration create_posts_table
+   php artisan make:migration CreatePostsTable
    ```
 
 #### Сброс и повторное выполнение всех миграций:
@@ -265,85 +265,128 @@ $table->nullableUlidMorphs('nullable_morphable');
 $table->nullableUuidMorphs('nullable_uuid_morphable');
 ```
 
-### Модификаторы столбцов
+### Модификаторы
 
-```php
-// Переместить столбец "email" после столбца "username" (работает в MySQL).
-$table->after('username'); // $table->string('email')->after('username')->nullable();
-
-// Установить столбец "id" как автоинкрементирующийся (первичный ключ).
-$table->autoIncrement();
-
-// Указать набор символов "utf8mb4" для столбца "content" (поддерживается MySQL).
-$table->charset('utf8mb4');
-
-// Указать каталожное сравнение "utf8mb4_unicode_ci" для столбца "name" (поддерживается MySQL/PostgreSQL/SQL Server).
-$table->collation('utf8mb4_unicode_ci');
-
-// Добавить комментарий к столбцу "description" (работает в MySQL/PostgreSQL).
-$table->comment('Описание столбца');
-
-// Установить значение "по умолчанию" для столбца "status".
-$table->default('active');
-
-// Поместить столбец "created_at" в начало таблицы (работает в MySQL).
-$table->first();
-
-// Установить начальное значение 100 для автоинкрементирующегося поля "order_id" (поддерживается MySQL / PostgreSQL).
-$table->from(100);
-
-// Сделать столбец "secret_key" невидимым для запросов SELECT * (работает в MySQL).
-$table->invisible();
-
-// Разрешить вставку NULL-значений в столбец "notes".
-$table->nullable();
-
-// Создать вычисляемый столбец "total_price" на основе выражения (поддерживается MySQL / PostgreSQL).
-$table->storedAs('price * quantity');
-
-// Установить INTEGER-столбец "votes" как UNSIGNED (работает в MySQL).
-$table->unsigned();
-
-// Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP как значение "по умолчанию".
-$table->useCurrent();
-
-// Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP при обновлении записи (работает в MySQL).
-$table->useCurrentOnUpdate();
-
-// Создать виртуальный вычисляемый столбец "full_name" на основе выражения (поддерживается MySQL / PostgreSQL / SQLite).
-$table->virtualAs('first_name || " " || last_name');
-
-// Создать столбец с автоинкрементом с указанными параметрами последовательности (поддерживается PostgreSQL).
-$table->generatedAs('nextval(\'my_sequence\')');
-
-// Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом (поддерживается PostgreSQL).
-$table->always();
-
-// Установить тип пространственного столбца "location" как "geometry" (поддерживается PostgreSQL).
-$table->isGeometry();
-```
+| Описание | Пример | Поддерживаемые СУБД |
+|----------|--------|--------------------|
+| Переместить столбец "email" после столбца "username". | `$table->string('email')->after('username')->nullable();` | MySQL |
+| Установить столбец "id" как автоинкрементирующийся (первичный ключ). | `$table->increments('id');` | MySQL, PostgreSQL, SQLite |
+| Указать набор символов "utf8mb4" для столбца "content". | `$table->string('content')->charset('utf8mb4');` | MySQL |
+| Указать каталожное сравнение "utf8mb4_unicode_ci" для столбца "name". | `$table->string('name')->collation('utf8mb4_unicode_ci');` | MySQL, PostgreSQL, SQL Server |
+| Добавить комментарий к столбцу "description". | `$table->string('description')->comment('Описание столбца');` | MySQL, PostgreSQL |
+| Установить значение "по умолчанию" для столбца "status". | `$table->string('status')->default('active');` | MySQL, PostgreSQL |
+| Поместить столбец "created_at" в начало таблицы. | `$table->timestamp('created_at')->first();` | MySQL |
+| Установить начальное значение 100 для автоинкрементирующегося поля "order_id". | `$table->increments('order_id')->from(100);` | MySQL, PostgreSQL |
+| Сделать столбец "secret_key" невидимым для запросов SELECT * | `$table->string('secret_key')->invisible();` | MySQL |
+| Разрешить вставку NULL-значений в столбец "notes". | `$table->string('notes')->nullable();` | MySQL, PostgreSQL |
+| Создать вычисляемый столбец "total_price" на основе выражения. | `$table->float('total_price')->storedAs('price * quantity');` | MySQL, PostgreSQL |
+| Установить INTEGER-столбцы, чтобы использовать CURRENT_TIMESTAMP как значение "по умолчанию" | `$table->integer('votes')->unsigned();` | MySQL |
+| Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP при обновлении записи | `$table->timestamp('updated_at')->useCurrentOnUpdate();` | MySQL |
+| Создать столбец с автоинкрементом с указанными параметрами последовательности | `$table->bigIncrements('id')->generatedAs('nextval(\'my_sequence\')');` | PostgreSQL |
+| Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом | `$table->bigIncrements('id')->always();` | PostgreSQL |
+| Установить тип пространственного столбца "location" как "geometry" | `$table->geometry('location')->isGeometry();` | PostgreSQL |
 
 ### Индексы
 
+| Описание | Пример | Поддерживаемые СУБД |
+|----------|--------|--------------------|
+| Добавить первичный ключ на столбец "id" | `$table->primary('id');` | MySQL, PostgreSQL, SQLite |
+| Добавить составной первичный ключ на столбцы "id" и "parent_id" | `$table->primary(['id', 'parent_id']);` | MySQL, PostgreSQL, SQLite |
+| Добавить уникальный индекс на столбец "email" | `$table->unique('email');` | MySQL, PostgreSQL, SQLite |
+| Добавить обычный индекс на столбец "state" | `$table->index('state');` | MySQL, PostgreSQL, SQLite |
+| Добавить полнотекстовый индекс на столбец "body" | `$table->fullText('body');` | MySQL, PostgreSQL |
+| Добавить полнотекстовый индекс на столбец "body" | `$table->fullText('body')->language('english');` | PostgreSQL |
+| Добавить пространственный индекс на столбец "location" | `$table->spatialIndex('location');` | MySQL, PostgreSQL |
+
+### Рекомендации
+##### Используйте осмысленные имена миграций
+
 ```php
-// Добавить первичный ключ на столбец "id".
-$table->primary('id');
-
-// Добавить составной первичный ключ на столбцы "id" и "parent_id".
-$table->primary(['id', 'parent_id']);
-
-// Добавить уникальный индекс на столбец "email".
-$table->unique('email');
-
-// Добавить обычный индекс на столбец "state".
-$table->index('state');
-
-// Добавить полнотекстовый индекс на столбец "body" (работает в MySQL/PostgreSQL).
-$table->fullText('body');
-
-// Добавить полнотекстовый индекс на столбец "body" с указанием языка (работает в PostgreSQL).
-$table->fullText('body')->language('english');
-
-// Добавить пространственный индекс на столбец "location" (кроме SQLite).
-$table->spatialIndex('location');
+// Эта миграция создает таблицу для хранения информации о пользователях
+CreateUsersTable
 ```
+
+#### Список популярных префиксов для именования миграций
+
+| Префикс | Назначение | Пример |
+|-|-|-|  
+| create_ | Создание таблицы | create_users_table |
+| add_ | Добавление столбца |  add_votes_column |
+| remove_ | Удаление столбца | remove_deprecated_columns |
+| drop_ | Удаление таблицы | drop_temp_table |
+| alter_ | Изменение столбца | alter_user_password_column |
+| rename_ | Переименование таблицы/столбца | rename_table_users_to_profiles |
+| optimize_ | Оптимизация таблицы | optimize_users_table |
+| modify_ | Модификация таблицы | modify_posts_table_charset |
+| populate_ | Заполнение таблицы | populate_posts_table |
+| reset_ | Сброс auto_increment | reset_auto_increment_id |
+| restore_ | Восстановление из backup | restore_posts_from_backup |
+
+#### Добавляйте комментарии в миграции  
+
+```php
+/**
+ * Add votes column to users table.
+ */ 
+public function up()
+{
+  Schema::table('users', function (Blueprint $table) {
+    $table->integer('votes');
+  });
+}
+```
+
+#### Разделяйте большие миграции 
+
+Если миграция получается слишком большой, разделите её на несколько отдельных миграций по логическим блокам.
+
+#### Реализуйте `down()` противоположно `up()`
+
+Метод `down()` должен действовать противоположно `up()`:
+
+```php 
+public function up()
+{
+  Schema::create('users');
+}
+
+public function down()
+{
+  Schema::drop('users');
+}
+```
+
+#### Добавляйте в .gitignore сгенерированные миграции
+
+```
+/database/migrations/*
+!/database/migrations/README.md
+```
+
+Это проигнорирует все миграции, кроме README.
+
+#### Тестируйте откаты перед продакшеном
+
+Перед применением миграций на продакшене протестируйте откаты:
+
+```
+php artisan migrate
+php artisan migrate:rollback
+```
+
+#### Используйте seeds после миграций 
+
+Seeds позволяют заполнить БД тестовыми данными. Используйте после миграций:
+
+```
+php artisan migrate
+php artisan db:seed
+```
+
+#### Следите за порядком миграций
+
+Следите, чтобы миграции выполнялись в правильном порядке без ошибок зависимостей.
+
+#### Не изменяйте применённые миграции
+
+Не изменяйте уже применённые на продакшене миграции. Создавайте новые миграции для изменений.
