@@ -267,7 +267,9 @@ $table->nullableUuidMorphs('nullable_uuid_morphable');
 
 ### Модификаторы
 
-| Описание | Пример | Поддерживаемые СУБД |
+Конечный вариант без слова "пример":
+
+| Описание | Код | Поддерживаемые СУБД |
 |----------|--------|--------------------|
 | Переместить столбец "email" после столбца "username". | `$table->string('email')->after('username')->nullable();` | MySQL |
 | Установить столбец "id" как автоинкрементирующийся (первичный ключ). | `$table->increments('id');` | MySQL, PostgreSQL, SQLite |
