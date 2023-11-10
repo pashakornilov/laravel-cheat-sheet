@@ -42,6 +42,7 @@ php artisan migrate:reset
 php artisan migrate:rollback
 ```
 
+
 ### Типы данных
 
 **Числовые типы данных:**
@@ -97,6 +98,7 @@ php artisan migrate:rollback
 | `longText`        | Длинный текстовый столбец                  |
 | `uuid`            | Уникальный идентификатор (UUID)           |
 
+
 ### Модификаторы
 
 | Описание | Код | Поддерживаемые СУБД |
@@ -118,6 +120,7 @@ php artisan migrate:rollback
 | Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом | `$table->bigIncrements('id')->always();` | PostgreSQL |
 | Установить тип пространственного столбца "location" как "geometry" | `$table->geometry('location')->isGeometry();` | PostgreSQL |
 
+
 ### Индексы
 
 | Описание | Пример | Поддерживаемые СУБД |
@@ -130,6 +133,7 @@ php artisan migrate:rollback
 | Добавить полнотекстовый индекс на столбец "body" | `$table->fullText('body')->language('english');` | PostgreSQL |
 | Добавить пространственный индекс на столбец "location" | `$table->spatialIndex('location');` | MySQL, PostgreSQL |
 
+
 ### Рекомендации
 
 #### Используйте осмысленные имена миграций
@@ -138,6 +142,7 @@ php artisan migrate:rollback
 // Эта миграция создает таблицу для хранения информации о пользователях
 CreateUsersTable
 ```
+
 
 #### Список популярных префиксов для именования миграций
 
@@ -155,6 +160,7 @@ CreateUsersTable
 | reset_ | Сброс auto_increment | reset_auto_increment_id |
 | restore_ | Восстановление из backup | restore_posts_from_backup |
 
+
 #### Добавляйте комментарии в миграции  
 
 ```php
@@ -169,9 +175,11 @@ public function up()
 }
 ```
 
+
 #### Разделяйте большие миграции 
 
 Если миграция получается слишком большой, разделите её на несколько отдельных миграций по логическим блокам.
+
 
 #### Реализуйте `down()` противоположно `up()`
 
@@ -189,6 +197,7 @@ public function down()
 }
 ```
 
+
 #### Добавляйте в .gitignore сгенерированные миграции
 
 ```
@@ -197,6 +206,7 @@ public function down()
 ```
 
 Это проигнорирует все миграции, кроме README.
+
 
 #### Тестируйте откаты перед продакшеном
 
@@ -207,6 +217,7 @@ php artisan migrate
 php artisan migrate:rollback
 ```
 
+
 #### Используйте seeds после миграций 
 
 Seeds позволяют заполнить БД тестовыми данными. Используйте после миграций:
@@ -216,9 +227,11 @@ php artisan migrate
 php artisan db:seed
 ```
 
+
 #### Следите за порядком миграций
 
 Следите, чтобы миграции выполнялись в правильном порядке без ошибок зависимостей.
+
 
 #### Не изменяйте применённые миграции
 
