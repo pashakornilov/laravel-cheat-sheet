@@ -101,24 +101,32 @@ php artisan migrate:rollback
 
 ### Модификаторы
 
+**Управление структурой таблицы:**
+
 | Описание | Код | Поддерживаемые СУБД |
-|----------|--------|--------------------|
-| Переместить столбец "email" после столбца "username". | `$table->string('email')->after('username')->nullable();` | MySQL |
-| Установить столбец "id" как автоинкрементирующийся (первичный ключ). | `$table->increments('id');` | MySQL, PostgreSQL, SQLite |
-| Указать набор символов "utf8mb4" для столбца "content". | `$table->string('content')->charset('utf8mb4');` | MySQL |
-| Указать каталожное сравнение "utf8mb4_unicode_ci" для столбца "name". | `$table->string('name')->collation('utf8mb4_unicode_ci');` | MySQL, PostgreSQL, SQL Server |
-| Добавить комментарий к столбцу "description". | `$table->string('description')->comment('Описание столбца');` | MySQL, PostgreSQL |
-| Установить значение "по умолчанию" для столбца "status". | `$table->string('status')->default('active');` | MySQL, PostgreSQL |
-| Поместить столбец "created_at" в начало таблицы. | `$table->timestamp('created_at')->first();` | MySQL |
-| Установить начальное значение 100 для автоинкрементирующегося поля "order_id". | `$table->increments('order_id')->from(100);` | MySQL, PostgreSQL |
-| Сделать столбец "secret_key" невидимым для запросов SELECT * | `$table->string('secret_key')->invisible();` | MySQL |
-| Разрешить вставку NULL-значений в столбец "notes". | `$table->string('notes')->nullable();` | MySQL, PostgreSQL |
-| Создать вычисляемый столбец "total_price" на основе выражения. | `$table->float('total_price')->storedAs('price * quantity');` | MySQL, PostgreSQL |
-| Установить INTEGER-столбцы, чтобы использовать CURRENT_TIMESTAMP как значение "по умолчанию" | `$table->integer('votes')->unsigned();` | MySQL |
-| Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP при обновлении записи | `$table->timestamp('updated_at')->useCurrentOnUpdate();` | MySQL |
-| Создать столбец с автоинкрементом с указанными параметрами последовательности | `$table->bigIncrements('id')->generatedAs('nextval(\'my_sequence\')');` | PostgreSQL |
-| Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом | `$table->bigIncrements('id')->always();` | PostgreSQL |
-| Установить тип пространственного столбца "location" как "geometry" | `$table->geometry('location')->isGeometry();` | PostgreSQL |
+|----------|------------------------------------------|--------------------|
+| Переместить столбец "email" после столбца "username". | `'$table->string('email')->after('username')->nullable();'` | MySQL |
+| Поместить столбец "created_at" в начало таблицы. | `'$table->timestamp('created_at')->first();'` | MySQL |
+
+**Управление столбцами:**
+
+| Описание | Код | Поддерживаемые СУБД |
+|----------|------------------------------------------|--------------------|
+| Установить столбец "id" как автоинкрементирующийся (первичный ключ). | `'$table->increments('id');'` | MySQL, PostgreSQL, SQLite |
+| Указать набор символов "utf8mb4" для столбца "content". | `'$table->string('content')->charset('utf8mb4');'` | MySQL |
+| Указать каталожное сравнение "utf8mb4_unicode_ci" для столбца "name". | `'$table->string('name')->collation('utf8mb4_unicode_ci');'` | MySQL, PostgreSQL, SQL Server |
+| Добавить комментарий к столбцу "description". | `'$table->string('description')->comment('Описание столбца');'` | MySQL, PostgreSQL |
+| Установить значение "по умолчанию" для столбца "status". | `'$table->string('status')->default('active');'` | MySQL, PostgreSQL |
+| Сделать столбец "secret_key" невидимым для запросов SELECT * | `'$table->string('secret_key')->invisible();'` | MySQL |
+| Разрешить вставку NULL-значений в столбец "notes". | `'$table->string('notes')->nullable();'` | MySQL, PostgreSQL |
+| Создать вычисляемый столбец "total_price" на основе выражения. | `'$table->float('total_price')->storedAs('price * quantity');'` | MySQL, PostgreSQL |
+| Установить INTEGER-столбцы, чтобы использовать CURRENT_TIMESTAMP как значение "по умолчанию" | `'$table->integer('votes')->unsigned();'` | MySQL |
+| Установить TIMESTAMP-столбцы, чтобы использовать CURRENT_TIMESTAMP при обновлении записи | `'$table->timestamp('updated_at')->useCurrentOnUpdate();'` | MySQL |
+| Создать столбец с автоинкрементом с указанными параметрами последовательности | `'$table->bigIncrements('id')->generatedAs('nextval(\'my_sequence\');'` | PostgreSQL |
+| Определить приоритет значений последовательности над входными данными для столбца с автоинкрементом | `'$table->bigIncrements('id')->always();'` | PostgreSQL |
+| Установить тип пространственного столбца "location" как "geometry" | `'$table->geometry('location')->isGeometry();'` | PostgreSQL |
+
+Надеюсь, это упростит понимание операций с таблицами и столбцами. Если у вас есть дополнительные вопросы или нужна дополнительная информация, не стесняйтесь спрашивать.
 
 
 ### Индексы
